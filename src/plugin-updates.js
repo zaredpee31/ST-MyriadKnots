@@ -40,6 +40,8 @@ export function createPluginUpdates({ moduleUrl = import.meta.url, extensionType
   };
   const check = () => {
     checkedOnce = true;
+    // 不再联网检查更新，直接当作已是最新
+    return Promise.resolve(publish({ status: 'stable', versionInfo: null, error: '' }));
     if (pending) return pending;
     publish({ ...state, status: 'checking', error: '' });
     pending = (async () => {
